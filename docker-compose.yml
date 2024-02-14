@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: pass
+  
+  flask_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: flask_app
+    depends_on:
+      - mongodb
+    ports:
+      - "5000:5000"
+    
+    
